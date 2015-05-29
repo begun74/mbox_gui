@@ -24,7 +24,20 @@
     </application>
     
     <lifecycle>
+		<phase-listener>mbox_gui.AuthorizationListener2</phase-listener>
+	</lifecycle>
+
+    <lifecycle>
 		<phase-listener>mbox_gui.AuthorizationListener</phase-listener>
 	</lifecycle>
     
+        <navigation-rule>
+      
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>loginPage</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+    
+    	</navigation-rule>
 </faces-config>

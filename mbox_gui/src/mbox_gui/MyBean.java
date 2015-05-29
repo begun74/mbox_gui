@@ -13,7 +13,7 @@ public class MyBean implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8919828040321221334L;
+	private static final long serialVersionUID = 891988040311334L;
 	private String name="";
 	private String pass="";
 	
@@ -35,7 +35,7 @@ public class MyBean implements Serializable {
 	}
 	
 	public String login() {
-		if (getName().equalsIgnoreCase("111"))
+		if (getName().equalsIgnoreCase("111") || getName().equalsIgnoreCase(""))
 		{	
 			getNavBean().getUser().setName(getName());
 			getNavBean().getUser().setPass(getPass());
