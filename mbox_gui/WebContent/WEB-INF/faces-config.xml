@@ -22,4 +22,9 @@
 		</variable-resolver>
 
     </application>
+    
+    <lifecycle>
+		<phase-listener>mbox_gui.AuthorizationListener</phase-listener>
+	</lifecycle>
+    
 </faces-config>

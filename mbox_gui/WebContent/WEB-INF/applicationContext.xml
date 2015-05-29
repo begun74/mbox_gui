@@ -5,6 +5,13 @@
       http://www.springframework.org/schema/beans/spring-beans.xsd">
       
 
+		<bean id="navBean" class="mbox_gui.NavBean" scope="session">
+				<property name="user" ref="user"/>
+		</bean>
 
+		<bean id="user" class="mbox_gui.view.User" scope="session">
+				<property name="name" value=""/>
+				<property name="pass" value=""/>
+		</bean>
 
 </beans>
