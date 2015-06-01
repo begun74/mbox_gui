@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.sun.faces.context.ApplicationMap;
 import com.sun.faces.context.SessionMap;
 
+import mbox_gui.NavBean;
 import mbox_gui.view.User;
 
 
@@ -23,7 +24,7 @@ public class AuthorizBean {
 	
 	private boolean login;
 	//@ManagedProperty(value="#{user}")
-	@ManagedProperty("#{user}")
+	//@ManagedProperty("#{user}")
 	private User user;
 	
 	public AuthorizBean() {
@@ -31,14 +32,17 @@ public class AuthorizBean {
 	}
 
 	public boolean isLogin(String name,String pass) {
-		if(name.equals("222")) 
+		if(name.equals("222") || name.equals("111")) 
 		{
 			//HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-			//user = new User();
-			//user.setName(name);
-			//user.setPass(pass);
+			user = new User();
+			user.setName(name);
+			user.setPass(pass);
 			//session.setAttribute("user", user);
 			//FacesContext.getCurrentInstance().getApplication().
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
+			NavBean navBean = (NavBean)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("navBean");
+			navBean.setUser(user);
 			login=true;
 		}
 		System.out.println("AuthorizBean.login - " + login);
