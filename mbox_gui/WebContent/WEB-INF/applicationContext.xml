@@ -6,8 +6,13 @@
       
 
 		<bean id="navBean" class="mbox_gui.NavBean" scope="session">
-				<property name="user" ref="user"/>
+				<property name="authorizBean" ref="authorizBean"/>
 		</bean>
+
+		<bean id="authorizBean" class="mbox_gui.util.AuthorizBean">
+				<property name="login" value="false"/>
+		</bean>
+
 
 		<bean id="user" class="mbox_gui.view.User" scope="session">
 				<property name="name" value=""/>

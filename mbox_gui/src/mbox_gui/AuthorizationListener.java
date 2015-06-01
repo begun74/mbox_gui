@@ -24,7 +24,7 @@ public class AuthorizationListener implements PhaseListener , Serializable{
 	private NavBean nB;
 	
 public void afterPhase(PhaseEvent event) {
-	//System.out.println("AuthorizationListener - '" + event.getPhaseId() + "'  '" + event.getSource());
+	System.out.println("AuthorizationListener - '" + event.getPhaseId() + "'  '" + event.getSource());
 	/*
  
 	FacesContext facesContext = event.getFacesContext();
@@ -52,7 +52,7 @@ public void afterPhase(PhaseEvent event) {
 }
  
 	public void beforePhase(PhaseEvent event) {
-		//System.out.println("AuthorizationListener - '" + event.getPhaseId() + "'  '" + event.getSource());
+		System.out.println("AuthorizationListener - '" + event.getPhaseId() + "'  '" + event.getSource());
 
 	}
  

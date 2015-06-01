@@ -25,11 +25,9 @@
     
     <lifecycle>
 		<phase-listener>mbox_gui.AuthorizationListener2</phase-listener>
+		<!-- phase-listener>mbox_gui.AuthorizationListener</phase-listener -->
 	</lifecycle>
 
-    <lifecycle>
-		<phase-listener>mbox_gui.AuthorizationListener</phase-listener>
-	</lifecycle>
     
         <navigation-rule>
       

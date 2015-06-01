@@ -6,6 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
+import mbox_gui.util.AuthorizBean;
+
 
 @ManagedBean
 @RequestScoped 
@@ -19,7 +21,6 @@ public class MyBean implements Serializable {
 	
 	@ManagedProperty(value="#{navBean}")
 	private NavBean navBean;
-	
 	
 	public String getName() {
 		return name;
@@ -35,13 +36,14 @@ public class MyBean implements Serializable {
 	}
 	
 	public String login() {
-		if (getName().equalsIgnoreCase("111") || getName().equalsIgnoreCase(""))
-		{	
-			getNavBean().getUser().setName(getName());
-			getNavBean().getUser().setPass(getPass());
+			//getNavBean().getUser().setName(getName());
+			//getNavBean().getUser().setPass(getPass());
+			
+			if(getNavBean().getAuthorizBean().isLogin(getName(),getPass()))
+			
 			return "1/1?faces-redirect=true";
-		}
-		else return null;
+			
+			else return null;
 	}
 	public NavBean getNavBean() {
 		return navBean;

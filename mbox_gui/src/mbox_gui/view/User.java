@@ -16,6 +16,11 @@ public class User implements Serializable {
 	private String name;
 	private String pass;
 	
+	public User() {
+		System.out.println("User Bean");
+	}
+
+	
 	
 	public String getName() {
 		return name;
