@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import mbox_gui.util.AuthorizBean;
+import mbox_gui.view.User;
 
 
 @ManagedBean
@@ -40,9 +41,13 @@ public class MyBean implements Serializable {
 			//getNavBean().getUser().setPass(getPass());
 			
 			if(getNavBean().getAuthorizBean().isLogin(getName(),getPass()))
-			
-			return "1/1?faces-redirect=true";
-			
+			{
+				User user = new User();
+				user.setName(name);
+				user.setPass(pass);
+				getNavBean().setUser(user);
+				return "1/1?faces-redirect=true";
+			}
 			else return null;
 	}
 	public NavBean getNavBean() {

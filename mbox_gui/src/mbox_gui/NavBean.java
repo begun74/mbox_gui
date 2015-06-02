@@ -6,6 +6,8 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import mbox_gui.util.AuthorizBean;
 import mbox_gui.view.User;
@@ -34,6 +36,7 @@ public class NavBean implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
 	}
 
 
@@ -46,4 +49,12 @@ public class NavBean implements Serializable {
 		this.authorizBean = authorizBean;
 	}
 
+	
+	public String logout() {
+		System.out.println("NavBean.logout");
+		HttpSession s = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		s.invalidate();
+			
+		return "/login?faces-redirect=true";
+}
 }
