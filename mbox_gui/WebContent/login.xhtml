@@ -7,11 +7,11 @@
 <link href="./css/styles.css" 
       rel="stylesheet" type="text/css"/> 
        <script>
-		function  myFunction(id) {
+		function  myFunction(id,message) {
 			if(document.getElementById(id).value.length == 0)
 			{
 				document.getElementById(id).focus();
-				return alert("Enter value!");
+				return alert(message);
 			}
 		}
 	</script>
@@ -44,7 +44,7 @@
 	</tr>
 	<tr>
 		<td align="center" colspan="2">
-			<h:commandButton value="OK" action="#{myBean.login}" onclick="myFunction('f:pass')"/>
+			<h:commandButton value="OK" action="#{myBean.login}" onclick="myFunction('f:pass','#{msg.pass} #{msg.required}')"/>
 		</td>
 	</tr>
 </table>
