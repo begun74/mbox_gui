@@ -19,6 +19,8 @@ public class MyBean implements Serializable {
 	private static final long serialVersionUID = 891988040311334L;
 	private String name="";
 	private String pass="";
+	private boolean passwordEditable = false;
+	private String message;
 	
 	@ManagedProperty(value="#{navBean}")
 	private NavBean navBean;
@@ -50,11 +52,33 @@ public class MyBean implements Serializable {
 			}
 			else return null;
 	}
+
+	public String submit() {
+		System.out.println("MyBean.submit");
+		return "2?faces-redirect=true";
+	}
+
 	public NavBean getNavBean() {
 		return navBean;
 	}
 	public void setNavBean(NavBean navBean) {
 		this.navBean = navBean;
+	}
+	public boolean isPasswordEditable() {
+		System.out.println("isPasswordEditable - "+getPass());
+		message = getPass();
+		return passwordEditable;
+	}
+	public void setPasswordEditable(boolean passwordEditable) {
+		this.passwordEditable = passwordEditable;
+		System.out.println("setPasswordEditable");
+
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }
