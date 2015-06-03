@@ -14,7 +14,11 @@
       		
     <script>
 		function  myFunction() {
-			return confirm("I am an alert box!");
+			if(document.getElementById('f:pass').value.length == 0)
+			{
+				document.getElementById('f:pass').focus();
+				return confirm("Enter value!");
+			}
 		}
 	</script>
 
@@ -26,7 +30,7 @@
 	<br/>
 	<h:inputSecret value="#{myBean.pass}" id="pass"/> 
 
-			<h:commandButton value="#{msg.edit}" rendered="#{!myBean.passwordEditable}">
+			<h:commandButton value="#{msg.edit}" rendered="#{!myBean.passwordEditable}" onclick="myFunction()" id="butOk">
 					<f:ajax render="pass ajaxMessage1" execute="pass"/>
 			</h:commandButton>
 	<br/>

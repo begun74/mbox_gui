@@ -6,10 +6,18 @@
 <h:head><title>JSF 2: Page Templating</title>
 <link href="./css/styles.css" 
       rel="stylesheet" type="text/css"/> 
-      <script type="text/javascript" src="/resources/js/main.js"></script>
+       <script>
+		function  myFunction(id) {
+			if(document.getElementById(id).value.length == 0)
+			{
+				document.getElementById(id).focus();
+				return alert("Enter value!");
+			}
+		}
+	</script>
 </h:head>
 <h:body>
-<h:form>
+<h:form id="f">
 <table align="center" border="0" >
 	<th colspan="2" class="title">Welcome!</th>
 	<tr>
@@ -29,16 +37,14 @@
 			#{msg.pass}
 		</td>
 		<td>
-			<h:inputSecret value="#{myBean.pass}" id="pass" required="true" requiredMessage="#{msg.required}  #{msg.pass}"/>
+			<h:inputSecret value="#{myBean.pass}" id="pass" />
 		</td>
-		<td>
-			<h:message dir="RTL" errorStyle="color:red; display:block" for="pass" />
-		</td>
+		
 
 	</tr>
 	<tr>
 		<td align="center" colspan="2">
-			<h:commandButton value="OK" action="#{myBean.login}" onClick="hello()"/>
+			<h:commandButton value="OK" action="#{myBean.login}" onclick="myFunction('f:pass')"/>
 		</td>
 	</tr>
 </table>
