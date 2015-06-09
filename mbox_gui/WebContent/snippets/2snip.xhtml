@@ -13,11 +13,12 @@
       		rel="stylesheet" type="text/css"/> 
       		
     <script>
-		function  myFunction() {
+		function  myFunction(id,message) {
 			if(document.getElementById('f:pass').value.length == 0)
 			{
 				document.getElementById('f:pass').focus();
-				return confirm("Enter value!");
+				alert("Enter value!")
+				return false;
 			}
 		}
 	</script>
@@ -25,17 +26,32 @@
 </h:head>      
       
 <h:body>
-
-	<h:inputText value="#{myBean.name}" id="name"/>
-	<br/>
-	<h:inputSecret value="#{myBean.pass}" id="pass"/> 
-
-			<h:commandButton value="#{msg.edit}" rendered="#{!myBean.passwordEditable}" onclick="myFunction()" id="butOk">
-					<f:ajax render="pass ajaxMessage1" execute="pass"/>
+	<table border="1">
+	<tr><td>
+	<h:inputText disable="true" value="#{myBean.name}" id="name">
+			<f:ajax event="keyup" listener="#{myBean.namedChanged}" render="ajaxMessage1"  />
+	</h:inputText>
+	</td></tr>
+<!-- 	<tr><td>
+	<h:inputText value="#{myBean.ajaxMessage}" id="ajaxMessage">
+			<f:ajax event="keyup" render="ajaxMessage1"  />
+	</h:inputText>
+	</td></tr>  -->
+	<tr><td>
+	<h:inputText value="#{myBean.pass}"  id="pass" > 
+			<f:ajax event="keyup" listener="#{myBean.namedChanged}" render="ajaxMessage1"  />
+	</h:inputText>
+	</td></tr>
+	<tr><td>
+			<h:commandButton value="#{msg.edit}" onclick="return myFunction()" 
+													id="butOk"  action="#{myBean.submit}">
+					<!-- f:ajax render="pass ajaxMessage1" execute="pass"/ -->
 			</h:commandButton>
-	<br/>
+	</td></tr>
+	<tr><td>
 	<h2><h:outputText value="#{myBean.message}" id="ajaxMessage1"/></h2>
-	
+	</td></tr>
+	</table>
 </h:body>      
       
 </html>

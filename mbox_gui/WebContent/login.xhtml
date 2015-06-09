@@ -2,6 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head><title>JSF 2: Page Templating</title>
 <link href="./css/styles.css" 
@@ -11,7 +12,8 @@
 			if(document.getElementById(id).value.length == 0)
 			{
 				document.getElementById(id).focus();
-				return alert(message);
+				alert(message)
+				return false;
 			}
 		}
 	</script>
@@ -25,12 +27,16 @@
 			#{msg.name}
 		</td>
 		<td>	
-			<h:inputText value="#{myBean.name}" id="name" required="true" requiredMessage="#{msg.required}  #{msg.name}"/>
+			<h:inputText value="#{myBean.name}" id="name" required="true" requiredMessage="#{msg.required}  #{msg.name}">
+				<f:ajax event="change" listener="#{myBean.namedChanged}" render="ajaxMessage1"  />
+			</h:inputText>
 			
 		</td>
 		<td>
-			<h:message dir="RTL" errorStyle="color:red; display:block" for="name" />
+			<h:message dir="RTL" errorStyle="color:red; display:block" for="name" id="nameError"/>
 		</td>
+	</tr>
+	<tr>
 	</tr>
 	<tr>
 		<td>
@@ -44,9 +50,18 @@
 	</tr>
 	<tr>
 		<td align="center" colspan="2">
-			<h:commandButton value="OK" action="#{myBean.login}" onclick="myFunction('f:pass','#{msg.pass} #{msg.required}')"/>
+			<h:commandButton value="OK" action="#{myBean.login}" onclick="return myFunction('f:pass','#{msg.pass} #{msg.required}')"/>
 		</td>
 	</tr>
+		<tr>
+		<td align="center" colspan="2">
+			<div style="display: block; position:relative; left:1px; top:1px;
+				 font-family:Verdana; font-size:10pt;padding:0px">
+			<h:outputText value="#{myBean.message}" id="ajaxMessage1" />
+			</div>
+		</td>	
+		</tr>
+	
 </table>
 </h:form>
 <ui:include src="/WEB-INF/snippets/training-course-ad.xhtml"/>

@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.*;
+import javax.faces.event.AjaxBehaviorEvent;
 
-import mbox_gui.util.AuthorizBean;
+
 import mbox_gui.view.User;
 
 
@@ -21,6 +22,7 @@ public class MyBean implements Serializable {
 	private String pass="";
 	private boolean passwordEditable = false;
 	private String message;
+	private String ajaxMessage;
 	
 	@ManagedProperty(value="#{navBean}")
 	private NavBean navBean;
@@ -54,7 +56,7 @@ public class MyBean implements Serializable {
 	}
 
 	public String submit() {
-		System.out.println("MyBean.submit");
+		System.out.println("MyBean.submit  message - "+name);
 		return "2?faces-redirect=true";
 	}
 
@@ -65,7 +67,9 @@ public class MyBean implements Serializable {
 		this.navBean = navBean;
 	}
 	public boolean isPasswordEditable() {
+		if(getPass().equals("ôûâ"))
 		System.out.println("isPasswordEditable - "+getPass());
+		
 		message = getPass();
 		return passwordEditable;
 	}
@@ -79,6 +83,18 @@ public class MyBean implements Serializable {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public String getAjaxMessage() {
+		return ajaxMessage;
+	}
+	public void setAjaxMessage(String ajaxMessage) {
+		this.ajaxMessage = ajaxMessage;
+	}
+	
+	public void namedChanged(AjaxBehaviorEvent event) {
+		if(!(name.equals("222") || name.equals("111"))) 
+				message = "namedChanged " + name +pass;
+		System.out.println(message);
 	}
 
 }
