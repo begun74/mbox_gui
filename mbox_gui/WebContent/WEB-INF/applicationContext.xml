@@ -13,6 +13,7 @@
 				<property name="login" value="false"/>
 		</bean>
 
+		<bean id="collectBean" class="mbox_gui.util.CollectBean"/>
 
 		<bean id="user" class="mbox_gui.view.User" scope="session">
 				<property name="name" value=""/>

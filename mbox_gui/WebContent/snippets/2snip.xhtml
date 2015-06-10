@@ -7,9 +7,9 @@
       
 <h:head>
 	<title>#{msg.listUsers}</title>
-	<link href="./css/styles.css" 
+	<link href="/css/styles.css" 
     	 	rel="stylesheet" type="text/css"/>
-	<link href="./css/table-styles.css" 
+	<link href="/css/table-styles.css" 
       		rel="stylesheet" type="text/css"/> 
       		
     <script>
@@ -21,36 +21,80 @@
 				return false;
 			}
 		}
+		
+		function showWorkingIndicator(data) {alert("!!");
+			showIndicatorRegion(data,"workingIndicator","ajaxMessage1");
+		}
+		
+		function showIndicatorRegion(data, spinnerRegionId,messageRegionId) {
+			if (data.status == "begin") {
+				clearExistingText(messageRegionId);
+				showElement(spinnerRegionId);
+			} else if (data.status == "complete") {
+				hideElement(spinnerRegionId);
+			} 
+		}
+		
+		function clearExistingText(id) {
+			document.getElementById(id).innerHTML = "";
+		}
+		
+		function showElement(id) {
+			document.getElementById(id).style.display = "block";
+		}
+		
+		function hideElement(id) {
+			document.getElementById(id).style.display = "none";
+		}
 	</script>
 
 </h:head>      
       
 <h:body>
 	<table border="1">
-	<tr><td>
+	<tr><td>Name
 	<h:inputText disable="true" value="#{myBean.name}" id="name">
 			<f:ajax event="keyup" listener="#{myBean.namedChanged}" render="ajaxMessage1"  />
 	</h:inputText>
 	</td></tr>
-<!-- 	<tr><td>
-	<h:inputText value="#{myBean.ajaxMessage}" id="ajaxMessage">
-			<f:ajax event="keyup" render="ajaxMessage1"  />
-	</h:inputText>
-	</td></tr>  -->
-	<tr><td>
+	<tr><td>Pass
 	<h:inputText value="#{myBean.pass}"  id="pass" > 
 			<f:ajax event="keyup" listener="#{myBean.namedChanged}" render="ajaxMessage1"  />
 	</h:inputText>
 	</td></tr>
-	<tr><td>
-			<h:commandButton value="#{msg.edit}" onclick="return myFunction()" 
-													id="butOk"  action="#{myBean.submit}">
+	<tr>
+		<td>
+		<h:selectOneMenu  value="#{collectBean.selItems}">
+			<f:selectItem itemLabel="--Choose Item--"/>
+			<f:selectItems value="#{collectBean.itemList}"/>
+			<f:ajax render="ajaxMessage1"/>
+		</h:selectOneMenu >
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"> 
+			<h:commandButton id="butOk" value="#{msg.edit}" 
+									onclick="return myFunction()" 
+									action="#{myBean.submit}"
+									>
 					<!-- f:ajax render="pass ajaxMessage1" execute="pass"/ -->
 			</h:commandButton>
-	</td></tr>
-	<tr><td>
-	<h2><h:outputText value="#{myBean.message}" id="ajaxMessage1"/></h2>
-	</td></tr>
+		
+			<h:commandButton id="butAjax" value="Ajax" 
+									action="#{collectBean.showBalance}"
+									onevent="showWorkingIndicator"
+									>
+					<f:ajax render="ajaxMessage1" execute="@form"/>
+			</h:commandButton>
+		</td>
+
+	</tr>
+	<tr>
+		<td>
+			<h2 id="workingIndicator" style="display: none">Loading data from server...</h2>
+			<h2><h:outputText value="#{myBean.message}" id="ajaxMessage1"/></h2>
+		</td>
+	</tr>
 	</table>
 </h:body>      
       

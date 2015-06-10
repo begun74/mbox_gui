@@ -29,15 +29,9 @@ public class AuthorizBean {
 	//@ManagedProperty(value="#{user}")
 	//@ManagedProperty("#{user}")
 	private User user;
-	private List itemList;
 	
 	public AuthorizBean() {
-		itemList = new ArrayList();
-		itemList.add("item 1");
-		itemList.add("item 2");
-		itemList.add("item 3");
-		itemList.add("item 4");
-		itemList.add("item 5");
+		
 		System.out.println("AuthorizBean");
 	}
 
@@ -61,14 +55,6 @@ public class AuthorizBean {
 
 	public void setLogin(boolean login) {
 		this.login = login;
-	}
-
-	public List getItemList() {
-		return itemList;
-	}
-
-	public void setItemList(List itemList) {
-		this.itemList = itemList;
 	}
 
 

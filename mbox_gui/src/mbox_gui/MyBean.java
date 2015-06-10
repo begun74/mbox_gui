@@ -79,10 +79,10 @@ public class MyBean implements Serializable {
 
 	}
 	public String getMessage() {
-		return message;
+		return navBean.getMessage();
 	}
 	public void setMessage(String message) {
-		this.message = message;
+		navBean.setMessage(message); 
 	}
 	public String getAjaxMessage() {
 		return ajaxMessage;
@@ -93,8 +93,10 @@ public class MyBean implements Serializable {
 	
 	public void namedChanged(AjaxBehaviorEvent event) {
 		if(!(name.equals("222") || name.equals("111"))) 
-				message = "namedChanged " + name +pass;
-		System.out.println(message);
+			navBean.setMessage("namedChanged " + name +pass);
+		else
+			navBean.setMessage(null);
+		System.out.println(navBean.getMessage());
 	}
 
 }
