@@ -59,7 +59,7 @@ public class MyBean implements Serializable {
 	}
 
 	public String submit() {
-		System.out.println("MyBean.submit  message - "+name);
+		System.out.println("MyBean.submit  message - "+navBean.getMessage());
 		return "2?faces-redirect=true";
 	}
 

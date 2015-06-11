@@ -75,10 +75,10 @@
 
 	<tr>
 		<td>
-		<h:selectOneMenu  value="#{collectBean.selItems}" id="collBean">
+		<h:selectOneListbox  id="collBean" value="#{collectBean.selItems}" size="5">
 			<f:selectItems value="#{collectBean.itemList}"/>
 			<f:ajax render="ajaxMessage1" />
-		</h:selectOneMenu >
+		</h:selectOneListbox >
 		</td>
 	</tr>
 	<tr>
