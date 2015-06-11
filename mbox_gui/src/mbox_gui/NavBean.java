@@ -25,7 +25,8 @@ public class NavBean implements Serializable {
 	
 	@ManagedProperty(value="#{user}")
 	private User user;
-	
+
+
 	@ManagedProperty(value="#{authorizBean}")
 	private AuthorizBean authorizBean;
 

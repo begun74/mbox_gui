@@ -2,12 +2,12 @@ package mbox_gui;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.*;
 import javax.faces.event.AjaxBehaviorEvent;
 
 
+
+import mbox_gui.util.CollectBean;
 import mbox_gui.view.User;
 
 
@@ -26,7 +26,10 @@ public class MyBean implements Serializable {
 	
 	@ManagedProperty(value="#{navBean}")
 	private NavBean navBean;
-	
+
+	@ManagedProperty(value="#{collectBean}")
+	private CollectBean collectBean;
+
 	public String getName() {
 		return name;
 	}
@@ -92,11 +95,15 @@ public class MyBean implements Serializable {
 	}
 	
 	public void namedChanged(AjaxBehaviorEvent event) {
-		if(!(name.equals("222") || name.equals("111"))) 
-			navBean.setMessage("namedChanged " + name +pass);
-		else
-			navBean.setMessage(null);
+		navBean.setMessage(name);
+		getCollectBean().showBalance();		
 		System.out.println(navBean.getMessage());
+	}
+	public CollectBean getCollectBean() {
+		return collectBean;
+	}
+	public void setCollectBean(CollectBean collectBean) {
+		this.collectBean = collectBean;
 	}
 
 }

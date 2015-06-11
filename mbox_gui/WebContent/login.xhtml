@@ -27,9 +27,7 @@
 			#{msg.name}
 		</td>
 		<td>	
-			<h:inputText value="#{myBean.name}" id="name" required="true" requiredMessage="#{msg.required}  #{msg.name}">
-				<f:ajax event="change" listener="#{myBean.namedChanged}" render="ajaxMessage1"  />
-			</h:inputText>
+			<h:inputText value="#{myBean.name}" id="name" required="true" requiredMessage="#{msg.required}  #{msg.name}"/>
 			
 		</td>
 		<td>

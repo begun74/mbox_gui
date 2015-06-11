@@ -12,7 +12,7 @@
 	<link href="/css/table-styles.css" 
       		rel="stylesheet" type="text/css"/> 
       		
-    <script>
+    <script type="text/javascript">
 		function  myFunction(id,message) {
 			if(document.getElementById('f:pass').value.length == 0)
 			{
@@ -22,8 +22,8 @@
 			}
 		}
 		
-		function showWorkingIndicator(data) {alert("!!");
-			showIndicatorRegion(data,"workingIndicator","ajaxMessage1");
+		function showWorkingIndicator(data) {
+			showIndicatorRegion(data,"workingIndicator","f:ajaxMessage1");
 		}
 		
 		function showIndicatorRegion(data, spinnerRegionId,messageRegionId) {
@@ -47,27 +47,37 @@
 			document.getElementById(id).style.display = "none";
 		}
 	</script>
-
+	
 </h:head>      
       
 <h:body>
-	<table border="1">
+
+	<table border="0">
 	<tr><td>Name
-	<h:inputText disable="true" value="#{myBean.name}" id="name">
-			<f:ajax event="keyup" listener="#{myBean.namedChanged}" render="ajaxMessage1"  />
+	<h:inputText value="#{myBean.message}" id="message">
+			<f:ajax event="keyup" listener="#{collectBean.showBalance}" render="collBean"  
+						onevent="showWorkingIndicator"/>
 	</h:inputText>
-	</td></tr>
+	</td>
+	<td>
+			<div id="workingIndicator" style="display: none; position:relative; left:1px; top:1px;
+				 font-family:Verdana; font-size:10pt;padding:0px">
+				<img src="../images/ajax-loader.gif"/>
+			</div>	
+	</td>
+	</tr>
 	<tr><td>Pass
 	<h:inputText value="#{myBean.pass}"  id="pass" > 
-			<f:ajax event="keyup" listener="#{myBean.namedChanged}" render="ajaxMessage1"  />
+			<f:ajax event="keypress" render="ajaxMessage1" listener="#{collectBean.showBalance}" />
+				<!-- execute="@form" onevent="showWorkingIndicator"/ -->
 	</h:inputText>
 	</td></tr>
+
 	<tr>
 		<td>
-		<h:selectOneMenu  value="#{collectBean.selItems}">
-			<f:selectItem itemLabel="--Choose Item--"/>
+		<h:selectOneMenu  value="#{collectBean.selItems}" id="collBean">
 			<f:selectItems value="#{collectBean.itemList}"/>
-			<f:ajax render="ajaxMessage1"/>
+			<f:ajax render="ajaxMessage1" />
 		</h:selectOneMenu >
 		</td>
 	</tr>
@@ -75,27 +85,27 @@
 		<td colspan="2"> 
 			<h:commandButton id="butOk" value="#{msg.edit}" 
 									onclick="return myFunction()" 
-									action="#{myBean.submit}"
-									>
+									action="#{myBean.submit}">
 					<!-- f:ajax render="pass ajaxMessage1" execute="pass"/ -->
 			</h:commandButton>
 		
 			<h:commandButton id="butAjax" value="Ajax" 
-									action="#{collectBean.showBalance}"
-									onevent="showWorkingIndicator"
-									>
-					<f:ajax render="ajaxMessage1" execute="@form"/>
+									action="#{collectBean.showBalance}">
+					<f:ajax render="ajaxMessage1" execute="@this" onevent="showWorkingIndicator"/>
 			</h:commandButton>
 		</td>
 
 	</tr>
 	<tr>
 		<td>
-			<h2 id="workingIndicator" style="display: none">Loading data from server...</h2>
-			<h2><h:outputText value="#{myBean.message}" id="ajaxMessage1"/></h2>
+			
+			<h6 id="workingIndicator" style="display: none">
+				<img src="../images/ajax-loader.gif"/>
+				Loading data from server...</h6>
+			<h6><h:outputText value="#{myBean.message}" id="ajaxMessage1"/></h6>
 		</td>
 	</tr>
 	</table>
+
 </h:body>      
-      
 </html>
