@@ -81,7 +81,7 @@ public class MyBean implements Serializable {
 		System.out.println("setPasswordEditable");
 
 	}
-	public String getMessage() {
+	public String getMessage() {System.out.println(navBean.getMessage());
 		return navBean.getMessage();
 	}
 	public void setMessage(String message) {

@@ -81,7 +81,7 @@ public class CollectBean implements Serializable {
 	
 	public String showBalance() {
 		try { 
-		Thread.sleep(500);  //System.out.println("showBalance"); 
+		Thread.sleep(200);  //System.out.println("showBalance"); 
 		Iterator<String> iter = listItems.iterator();
 		ArrayList new_itemList = new ArrayList();
 		
