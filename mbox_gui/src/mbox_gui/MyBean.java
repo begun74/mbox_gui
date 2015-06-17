@@ -7,6 +7,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 
 
+
 import mbox_gui.util.CollectBean;
 import mbox_gui.view.User;
 
@@ -58,7 +59,8 @@ public class MyBean implements Serializable {
 			else return null;
 	}
 
-	public String submit() {
+	public String submit()  {
+		
 		System.out.println("MyBean.submit  message - "+navBean.getMessage());
 		return "2?faces-redirect=true";
 	}

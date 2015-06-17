@@ -80,7 +80,7 @@ public class CollectBean implements Serializable {
 	}
 	
 	public String showBalance() {
-		try { 
+		try { //if(navBean.getMessage() == null) throw new Exception();
 		Thread.sleep(200);  //System.out.println("showBalance"); 
 		Iterator<String> iter = listItems.iterator();
 		ArrayList new_itemList = new ArrayList();
