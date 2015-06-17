@@ -1,8 +1,10 @@
 package mbox_gui.except;
 
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.faces.FacesException;
+import javax.faces.application.NavigationHandler;
 import javax.faces.context.*;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
@@ -38,6 +40,27 @@ public class MyExceptionHandler extends ExceptionHandlerWrapper {
             ExceptionQueuedEventContext exceptionQueuedEventContext = (ExceptionQueuedEventContext) exceptionQueuedEvent.getSource();
             
             Throwable throwable = exceptionQueuedEventContext.getException();
+            
+            if(throwable instanceof Throwable)
+            {
+            	System.out.println("Throwable!!!");
+            	Throwable t = (Throwable)throwable;
+                
+                FacesContext facesContext = FacesContext.getCurrentInstance();
+                 
+                Map<String, Object> requestMap = facesContext.getExternalContext().getRequestMap();
+                NavigationHandler navigationHandler = facesContext.getApplication().getNavigationHandler();
+                 
+                try{
+                    requestMap.put("currentView", t.getMessage());
+                    facesContext.getExternalContext().getFlash().put("exceptioniNFO",t.getCause());
+                    navigationHandler.handleNavigation(facesContext,null, "/error?faces-redirect=true");
+                    facesContext.renderResponse();
+                }finally{
+                    i.remove();
+                     
+                }
+            }
         }
 		
 	}
