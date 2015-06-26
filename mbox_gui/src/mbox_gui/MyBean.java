@@ -1,9 +1,14 @@
 package mbox_gui;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.faces.bean.*;
 import javax.faces.event.AjaxBehaviorEvent;
+
+
 
 
 
@@ -24,12 +29,27 @@ public class MyBean implements Serializable {
 	private boolean passwordEditable = false;
 	private String message;
 	private String ajaxMessage;
+
+	private String _yyyy="";
+	private String _mm="";
+	private String _dd="";
+	private List <String> selListYYYY = new ArrayList<String>();
+	
 	
 	@ManagedProperty(value="#{navBean}")
 	private NavBean navBean;
 
 	@ManagedProperty(value="#{collectBean}")
 	private CollectBean collectBean;
+	
+	public MyBean() {
+		Calendar rightNow = Calendar.getInstance();
+		_yyyy = rightNow.get(Calendar.YEAR)+"";
+		_mm = rightNow.get(Calendar.MONTH)+1 +"";
+		_dd = rightNow.get(Calendar.DAY_OF_MONTH) +"";
+		
+		
+	}
 
 	public String getName() {
 		return name;
@@ -62,6 +82,7 @@ public class MyBean implements Serializable {
 	public String submit()  {
 		
 		System.out.println("MyBean.submit  message - "+navBean.getMessage());
+		System.out.println(getSelListYYYY()+" "+get_mm()+" "+get_dd());
 		return "2?faces-redirect=true";
 	}
 
@@ -99,13 +120,39 @@ public class MyBean implements Serializable {
 	public void namedChanged(AjaxBehaviorEvent event) {
 		navBean.setMessage(name);
 		getCollectBean().showBalance();		
-		System.out.println(navBean.getMessage());
+		System.out.println("navBean.getMessage() - " +navBean.getMessage());
 	}
 	public CollectBean getCollectBean() {
 		return collectBean;
 	}
 	public void setCollectBean(CollectBean collectBean) {
 		this.collectBean = collectBean;
+	}
+	public String get_yyyy() {
+		return _yyyy;
+	}
+	public void set_yyyy(String _yyyy) {
+		this._yyyy = _yyyy;
+	}
+	public String get_mm() {
+		return _mm;
+	}
+	public void set_mm(String _mm) {
+		this._mm = _mm;
+	}
+	public String get_dd() {
+		return _dd;
+	}
+	public void set_dd(String _dd) {
+		this._dd = _dd;
+	}
+
+	public List <String> getSelListYYYY() {
+		return selListYYYY;
+	}
+
+	public void setSelListYYYY(List <String> selListYYYY) {
+		this.selListYYYY = selListYYYY;
 	}
 
 }

@@ -3,6 +3,7 @@ package mbox_gui.util;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,25 +24,38 @@ public class CollectBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 7423638834312196351L;
 	private List<String> itemList;	
+	@ValidEmail 
 	private String selItem;
 	private String message;
-	private List<String> listItems = new ArrayList<String>();	
+	private List<String> listItems = new ArrayList<String>();
+	private List<Integer> listYYYY = new ArrayList<Integer>();
+	private List<Integer> listMM = new ArrayList<Integer>();
+	private List<Integer> listDD = new ArrayList<Integer>();
+	
+
 	@ManagedProperty(value="#{navBean}")
 	private NavBean navBean;
 
 	
 	public CollectBean() {
-		System.out.println("CollectBean");
+
+		Calendar rightNow = Calendar.getInstance();
+		int yyyy=rightNow.get(Calendar.YEAR);
+		int dd =1;
+		int mm =1;
 		
 		int i =1;
 		while (i<=100 ) 
 			listItems.add("item "+ i++);
 
-		listItems.add("bvv@minsk.gov.by");
-		listItems.add("dim@minsk.gov.by");
-		listItems.add("bvv2@minsk.gov.by");
+		
 
 		setItemList(listItems);
+		
+		while(dd <=31)  getListDD().add(dd++);
+		while(mm <=12)  getListMM().add(mm++);
+		while(yyyy <=rightNow.get(Calendar.YEAR)+3)	getListYYYY().add(yyyy++);
+		System.out.println("CollectBean");
 	}
 
 	public List<String> getItemList() {
@@ -69,11 +83,11 @@ public class CollectBean implements Serializable {
 		navBean.setMessage(message); 
 	}
 
-	public String getSelItems() {
+	public String getSelItem() {
 		return selItem;
 	}
 
-	public void setSelItems(String selItem) {
+	public void setSelItem(String selItem) {
 		System.out.println("CollectBean.setSelItems - "+selItem);
 		navBean.setMessage(selItem);
 		this.selItem = selItem;
@@ -96,5 +110,30 @@ public class CollectBean implements Serializable {
 		} catch(InterruptedException ie) {}
 		return null;
 	}
+
+	public List<Integer> getListMM() {
+		return listMM;
+	}
+
+	public void setListMM(List<Integer> listMM) {
+		this.listMM = listMM;
+	}
+
+	public List<Integer> getListYYYY() {
+		return listYYYY;
+	}
+
+	public void setListYYYY(List<Integer> listYYYY) {
+		this.listYYYY = listYYYY;
+	}
+
+	public List<Integer> getListDD() {
+		return listDD;
+	}
+
+	public void setListDD(List<Integer> listDD) {
+		this.listDD = listDD;
+	}
+
 
 }

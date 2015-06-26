@@ -21,7 +21,7 @@ public class NavBean implements Serializable {
 	 */
 	private static final long serialVersionUID = -504806999704103644L;
 	
-	private String message;
+	private String message="";
 	
 	@ManagedProperty(value="#{user}")
 	private User user;

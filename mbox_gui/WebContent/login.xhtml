@@ -41,7 +41,7 @@
 			#{msg.pass}
 		</td>
 		<td>
-			<h:inputSecret value="#{myBean.pass}" id="pass" />
+			<h:inputSecret redisplay="false" value="#{myBean.pass}" id="pass" />
 		</td>
 		
 
@@ -58,6 +58,7 @@
 			<h:outputText value="#{navBean.message}" id="ajaxMessage1" />
 			</div>
 		</td>	
+		
 		</tr>
 	
 </table>

@@ -68,7 +68,7 @@
 	</tr>
 	<tr>
 		<td>
-		<h:selectOneListbox  id="collBean" value="#{collectBean.selItems}" size="5">
+		<h:selectOneListbox  id="collBean" value="#{collectBean.selItem}" size="5">
 			<f:selectItems value="#{collectBean.itemList}"/>
 			<f:ajax render="ajaxMessage1" />
 		</h:selectOneListbox >
@@ -94,6 +94,32 @@
 									action="#{collectBean.showBalance}">
 					<f:ajax render="ajaxMessage1" execute="@this" onevent="showWorkingIndicator"/>
 			</h:commandButton>
+		</td>
+
+	</tr>
+	<tr>
+		<!-- <td>
+		 
+		<h:selectOneMenu id="collbeanYYYY" value="#{myBean._yyyy}" >
+			<f:selectItems value="#{collectBean.listYYYY}"/>
+		</h:selectOneMenu>
+		</td> -->
+		<td>
+		<h:selectManyMenu  id="selListYYYY"
+                      layout="pageDirection"
+                      value="#{myBean.selListYYYY}">
+    		<f:selectItems value="#{collectBean.listYYYY}"/>
+		</h:selectManyMenu >
+		</td>
+		<td>
+		<h:selectOneMenu id="collbeanMM" value="#{myBean._mm}" >
+			<f:selectItems value="#{collectBean.listMM}"/>
+		</h:selectOneMenu>
+		</td>
+		<td>
+		<h:selectOneMenu id="collbeanDD" value="#{myBean._dd}" >
+			<f:selectItems value="#{collectBean.listDD}"/>
+		</h:selectOneMenu>
 		</td>
 
 	</tr>

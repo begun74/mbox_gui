@@ -8,10 +8,12 @@
 <h:body>
 <h:form>
   
-    <p>SOME UNHANDLED EXCEPTION OCCURED</p>
+    <p>EXCEPTION OCCURED</p>
       #{currentView}
+      <br/>
      #{flash.exceptioniNFO}
-     
+     <br/>
+     <h:commandLink value="to Login page" action="#{navBean.logout}" title="to Login"/>
   </h:form>
 </h:body>
 </html>

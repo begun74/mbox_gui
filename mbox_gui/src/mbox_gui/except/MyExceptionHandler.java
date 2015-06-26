@@ -23,19 +23,19 @@ public class MyExceptionHandler extends ExceptionHandlerWrapper {
 	@Override
 	public ExceptionHandler getWrapped() 
 	{
-		System.out.println("getWrapped"+" "+this.exceptionHandler );
+		//System.out.println("getWrapped"+" "+this.exceptionHandler );
 		return this.exceptionHandler;
 	}
 	
 	@Override
     public void handle() throws FacesException 
 	{
-		System.out.println("handle()");
+		//System.out.println("handle()");
 		
 		for(Iterator<ExceptionQueuedEvent> i = getUnhandledExceptionQueuedEvents().iterator();i.hasNext();)
         {
 			ExceptionQueuedEvent exceptionQueuedEvent =i.next();
-            System.out.println("Iterating over ExceptionQueuedEvents.current:"+exceptionQueuedEvent.toString());
+            //System.out.println("Iterating over ExceptionQueuedEvents.current:"+exceptionQueuedEvent.toString());
             
             ExceptionQueuedEventContext exceptionQueuedEventContext = (ExceptionQueuedEventContext) exceptionQueuedEvent.getSource();
             
@@ -51,7 +51,7 @@ public class MyExceptionHandler extends ExceptionHandlerWrapper {
                 Map<String, Object> requestMap = facesContext.getExternalContext().getRequestMap();
                 NavigationHandler navigationHandler = facesContext.getApplication().getNavigationHandler();
                  
-                try{
+                try{System.out.println(t.getMessage()+"  "+t.getCause());
                     requestMap.put("currentView", t.getMessage());
                     facesContext.getExternalContext().getFlash().put("exceptioniNFO",t.getCause());
                     navigationHandler.handleNavigation(facesContext,null, "/error?faces-redirect=true");
